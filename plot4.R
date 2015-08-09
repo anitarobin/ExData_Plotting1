@@ -17,7 +17,7 @@
   df$datetime<-strptime(paste(df[,1],df[,2]),format = "%d/ %m/ %Y %H:%M:%S")
 
 #set the height and width for the plot
-  windows.options(width=480,height=480)
+  png(filename="plot4.png",width=480,height=480)
 #set the margins and plot grid as two rows and two columns
   par(mar=c(4,4,2,2),mfrow=c(2,2),oma=c(0,0,2,0))
 
@@ -34,13 +34,12 @@ with(df,{
           lines(datetime,Sub_metering_2,col="red")
           lines(datetime,Sub_metering_3,col="blue")
           legend("topright",lwd=1,col=c("black","red","blue"),
-            legend=(c(names(df[7:9]))),cex=0.5)
+            legend=(c(names(df[7:9]))),cex=0.75,bty="n")
   #fourth plot
           plot(datetime,Global_reactive_power,type="n")
           lines(datetime,Global_reactive_power,col="black",type="l")
   
 })
-#send it to the desired file
-dev.copy(png,file="plot4.png")
+
 #turn the device off
 dev.off()
